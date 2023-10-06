@@ -1,8 +1,11 @@
 import { connectDb } from "@/helper/db";
 import { jkNight } from "@/models/user";
 import { NextResponse } from "next/server";
+import bcrypt from 'bcryptjs'
 
 connectDb();
+
+
 
 
 export async function GET(request){
@@ -21,15 +24,26 @@ export async function GET(request){
        return NextResponse.json(sers);
 }
 
+
+
+
 export async function POST(request){
     const {name , email , password} = await request.json();
-       try{
-        const ABC = await new jkNight({
+      
+    const ABC = await new jkNight({
         name,
         email,
         password,
        });
+    
+    try{
+
+        
+         ABC.password =  bcrypt.hashSync(ABC.password,parseInt(process.env.BCRYPT_SALT)
+         );
        
+       console.log(ABC);
+
        await ABC.save();
        
        console.log("Data Send Successfulley");
