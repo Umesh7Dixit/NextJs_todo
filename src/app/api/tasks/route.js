@@ -2,7 +2,7 @@ import { connectDb } from "@/helper/db";
 import { getResponseMessage } from "@/helper/responseMessage";
 import { jkTask } from "@/models/task";
 import { NextResponse } from "next/server";
-
+import jwt from "jsonwebtoken";
 connectDb();
 
 export async function GET(request){
@@ -19,12 +19,24 @@ export async function GET(request){
 
 
 export async function POST(request){
-    const{ title, content, userId } = await request.json();
+    const{ title, content, userId, status} = await request.json();
+
+    // fetchinig Loggedin user Id
+    const authToken = request.cookies.get("authToken")?.value;
+   
+    // console.log(authToken);
+ 
+    const data  =  jwt.verify(authToken, process.env.JWT_KEY);
+    console.log(data._id);
+ 
+
+
     try{
         const radhe = await new jkTask({
             title,
             content,
-            userId,
+            userId: data._id,
+            status,
         })
 
         await radhe.save();

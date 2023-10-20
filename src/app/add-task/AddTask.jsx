@@ -17,8 +17,8 @@ const AddTask = () => {
                                          content: "",
                                          status: "none",
 
-
-                                         userId: "650fb9c797a29bba99870075",
+                                        //  temp solution 
+                                         userId: "65203b611de70b26782bbb94",
                                         });
 
 
@@ -72,8 +72,8 @@ const AddTask = () => {
                     <label className='block text-sm font-medium mb-2' htmlFor='task_status'>Status</label>
                     <select id="task_status"  name='task_status'  onChange={(event)=>{setTask({...task,status:event.target.value})}} value={task.status} className='w-full p-3 rounded-3xl bg-gray-800  focus:ring-white-400-100 border border-gray-800 '>
                       <option value={'none'}  disabled >---Select Status---</option>
-                      <option value={'Pending'}>Pending</option>
-                      <option value={'Completed'}>Completed</option>
+                      <option value={'pending'}>pending</option>
+                      <option value={'completed'}>completed</option>
                     </select>
                   </div>
 

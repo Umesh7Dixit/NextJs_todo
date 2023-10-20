@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       
               <CustomNavbar/>
               
-              <div>{children}</div>
+              <div className="mt-0">{children}</div>
               
               <Footer/>
 
